@@ -49,3 +49,8 @@ add_executable(db_test ./test/test.cc)
 target_link_libraries(db_test ${CMAKE_PROJECT_NAME})
 target_link_libraries(db_test gtest_main)
 add_test(NAME db_test COMMAND db_test)
+
+add_executable(skiptable_test ./test/skiplist_test.cc)
+target_link_libraries(skiptable_test ${CMAKE_PROJECT_NAME})
+target_link_libraries(skiptable_test gtest_main glog::glog)
+add_test(NAME skiplist_test COMMAND skiplist_test)
