@@ -1,6 +1,4 @@
-cmake_minimum_required (VERSION 2.6)
-SET(CMAKE_C_COMPILER /usr/bin/clang)
-SET(CMAKE_CXX_COMPILER /usr/bin/clang++)
+cmake_minimum_required (VERSION 3.8)
 # specify the C++ standard
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
@@ -53,4 +51,4 @@ add_test(NAME db_test COMMAND db_test)
 add_executable(skiptable_test ./test/skiplist_test.cc)
 target_link_libraries(skiptable_test ${CMAKE_PROJECT_NAME})
 target_link_libraries(skiptable_test gtest_main glog::glog)
-add_test(NAME skiplist_test COMMAND skiplist_test)
+add_test(NAME skiptable_test COMMAND skiptable_test)

@@ -5,8 +5,7 @@
 #include <glog/logging.h>
 #include <memory>
 namespace minidb {
-template <class DataType>
-class SkipList {
+template <class DataType> class SkipList {
 public:
   static constexpr int MAX_HEIGHT = 12;
   using Comparator = int (*)(const DataType&, const DataType&);
@@ -40,8 +39,7 @@ public:
   bool Contains(const DataType& content);
 
 private:
-  SkipBar* FindInsertionPoint(const DataType& content,
-                              SkipBar** prev = nullptr);
+  SkipBar* FindInsertionPoint(const DataType& content, SkipBar** prev = nullptr);
 
   int RandomHeight();
 };
@@ -54,8 +52,7 @@ SkipList<DataType>::SkipList(const Comparator& comp)
     head_->pieces[i] = nullptr;
 }
 
-template <class DataType>
-int SkipList<DataType>::RandomHeight() {
+template <class DataType> int SkipList<DataType>::RandomHeight() {
   static const unsigned int kBranching = 4;
   int height = 1;
   while (height < MAX_HEIGHT && ((rnd_.Next() % kBranching) == 0))
@@ -65,13 +62,11 @@ int SkipList<DataType>::RandomHeight() {
   return height;
 }
 
-template <class DataType>
-SkipList<DataType>::~SkipList() {
+template <class DataType> SkipList<DataType>::~SkipList() {
   // TODO
 }
 
-template <class DataType>
-void SkipList<DataType>::Insert(const DataType& content) {
+template <class DataType> void SkipList<DataType>::Insert(const DataType& content) {
   SkipBar* prev[MAX_HEIGHT];
   SkipBar* insert_point = FindInsertionPoint(content, prev);
   int height = RandomHeight();
@@ -93,8 +88,7 @@ void SkipList<DataType>::Insert(const DataType& content) {
 
 template <class DataType>
 typename SkipList<DataType>::SkipBar*
-SkipList<DataType>::FindInsertionPoint(const DataType& content,
-                                       SkipBar* prev[]) {
+SkipList<DataType>::FindInsertionPoint(const DataType& content, SkipBar* prev[]) {
   SkipBar* node = head_;
   unsigned int level = height_ - 1;
   while (true) {
@@ -112,8 +106,7 @@ SkipList<DataType>::FindInsertionPoint(const DataType& content,
   }
 }
 
-template <class DataType>
-bool SkipList<DataType>::Contains(const DataType& content) {
+template <class DataType> bool SkipList<DataType>::Contains(const DataType& content) {
   SkipBar* result = FindInsertionPoint(content);
   return result != nullptr && comp_(result->content, content) == 0;
 }
